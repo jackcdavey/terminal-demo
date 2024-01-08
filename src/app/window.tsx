@@ -1,6 +1,6 @@
 // A div wrapper stylized like a terminal window, with macOS window controls. Accepts children.
 import React from 'react';
-import styles from './TerminalWindow.module.css'; // Assuming you have CSS module support
+import styles from './TerminalWindow.module.css';
 
 type TerminalWindowProps = {
     children: React.ReactNode;
@@ -15,7 +15,10 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
                     <span className={`${styles.button} ${styles.minimize}`}></span>
                     <span className={`${styles.button} ${styles.maximize}`}></span>
                 </div>
-                <div className={styles.title}>Terminal - Jack Davey</div>
+                <div className={styles.title}>
+                    {/* jack_davey –– -zsh */}
+                    jackdavey.org
+                </div>
             </div>
             <div className={styles.content}>
                 {children}

@@ -25,6 +25,8 @@ export default function Home() {
         `}
         </pre>
         <TaglineTxt />
+        <br />
+        <br />
         <TerminalText />
       </TerminalWindow>
     </main>

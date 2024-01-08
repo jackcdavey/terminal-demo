@@ -6,7 +6,7 @@ import localFont from 'next/font/local'
 const inter = Inter({ subsets: ['latin'] })
 
 const andale = localFont({
-  src: './styles/fonts/ANDALEMO.ttf',
+  src: '../ANDALEMO.ttf',
 })
 
 export const metadata: Metadata = {

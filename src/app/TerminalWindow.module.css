@@ -1,19 +1,28 @@
 /* components/TerminalWindow.module.css */
 
 .terminalWindow {
-  background: #2d2d2d;
-  color: #fff;
+  background-color: black;
+  color: #0aff32;
   border-radius: 8px;
-  padding: 12px;
+  /* padding: 12px; */
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  width: 95vw;
+  height: 90vh;
+  max-width: 60rem;
+  max-height: 80rem;
+  overflow-x: auto;
 }
 
 .titleBar {
   display: flex;
+  position: fixed;
   align-items: center;
-  padding: 8px;
-  background: #1a1a1a;
+  padding: 0.6rem;
+  background: #f2f2f2;
   border-radius: 6px 6px 0 0;
+  color: rgb(87, 87, 87);
+  width: 95vw;
+  max-width: 60rem;
 }
 
 .buttons {

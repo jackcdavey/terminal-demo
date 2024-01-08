@@ -25,9 +25,8 @@ const TaglineTxt = () => {
                 delay,
             ]}
             wrapper="span"
-            cursor={true}
+            cursor={false} //Avoid confusion with user input
             repeat={Infinity}
-        // style={{ fontSize: '20px', color: 'green' }}
         />
     )
 };
