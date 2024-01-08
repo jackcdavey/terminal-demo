@@ -3,15 +3,17 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 
+
 import TaglineTxt from './tagline'
 import TerminalText from './terminal'
+import TerminalWindow from './window'
 
 export default function Home() {
   return (
     <main className={styles.main}>
-
-      <pre>
-        {`
+      <TerminalWindow>
+        <pre>
+          {`
           _    _                  _____ _                  _            _    
          | |  | |                |_   _( )                | |          | |   
          | |__| | ___ _   _        | | |/ _ __ ___        | | __ _  ___| | __
@@ -21,10 +23,12 @@ export default function Home() {
                        __/ ||/                                              
                       |___/                                                
         `}
-      </pre>
-      <TaglineTxt />
-      <TerminalText />
+        </pre>
+        <TaglineTxt />
+        <TerminalText />
+      </TerminalWindow>
     </main>
   )
 }
+
 
