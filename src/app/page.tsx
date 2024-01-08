@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 
+import TaglineTxt from './tagline'
 import TerminalText from './terminal'
 
 export default function Home() {
@@ -21,7 +22,7 @@ export default function Home() {
                       |___/                                                
         `}
       </pre>
-
+      <TaglineTxt />
       <TerminalText />
       <p>
         Hi, Im Jack
