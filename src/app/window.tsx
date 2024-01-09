@@ -26,6 +26,9 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
                 const helpOutput = helpCommand();
                 setTerminalHistory(terminalHistory => [...terminalHistory, helpOutput]);
                 break;
+            case 'clear':
+                setTerminalHistory([]);
+                break;
             case 'about':
                 const aboutOutput = aboutCommand();
                 setTerminalHistory(terminalHistory => [...terminalHistory, aboutOutput]);

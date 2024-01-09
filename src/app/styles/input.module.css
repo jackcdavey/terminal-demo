@@ -1,8 +1,13 @@
 .terminalInput {
-    background: #333;
-    color: #fff;
+    background-color: inherit;
+    color: inherit;
+    font: inherit;
     border: none;
     padding: 8px;
     width: 100%;
     box-sizing: border-box;
+}
+
+.terminalInput:focus {
+    outline: none;
 }
