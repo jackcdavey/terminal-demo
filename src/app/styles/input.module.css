@@ -1,0 +1,8 @@
+.terminalInput {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}

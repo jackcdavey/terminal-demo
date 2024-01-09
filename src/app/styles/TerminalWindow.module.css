@@ -1,7 +1,7 @@
 /* components/TerminalWindow.module.css */
 
 .terminalWindow {
-  background-color: black;
+  background-color: rgb(9, 9, 9);
   color: #0aff32;
   border-radius: 8px;
   /* padding: 12px; */
@@ -11,6 +11,7 @@
   max-width: 60rem;
   max-height: 80rem;
   overflow-x: auto;
+  font-size: 1rem;
 }
 
 .titleBar {
@@ -57,5 +58,13 @@
 }
 
 .content {
-  padding: 20px;
+  padding: 1rem;
+}
+
+.preformatted {
+  white-space: pre-wrap;
+  /* Since white-space: pre; doesn't wrap text */
+  margin: 0;
+  /* Remove default margin from <pre> tag */
+  /* Add other styles if needed */
 }
