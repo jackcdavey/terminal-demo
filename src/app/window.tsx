@@ -7,6 +7,9 @@ import styles from './styles/TerminalWindow.module.css';
 import { aboutCommand } from './commands/about';
 import { projectsCommand } from './commands/projects';
 import { helpCommand } from './commands/help';
+import { contactCommand } from './commands/contact';
+import { bannerCommand } from './commands/banner';
+import { resumeCommand } from './commands/resume';
 
 type TerminalWindowProps = {
     children: React.ReactNode;
@@ -29,13 +32,26 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
             case 'clear':
                 setTerminalHistory([]);
                 break;
+            case 'banner':
+                const bannerOutput = bannerCommand();
+                setTerminalHistory(terminalHistory => [...terminalHistory, bannerOutput]);
+                break;
             case 'about':
                 const aboutOutput = aboutCommand();
                 setTerminalHistory(terminalHistory => [...terminalHistory, aboutOutput]);
                 break;
+            case 'resume':
+                const resumeOutput = resumeCommand();
+                setTerminalHistory(terminalHistory => [...terminalHistory, `> ${command}`, resumeOutput]);
+                window.open('/resume.png', '_blank');
+                break;
             case 'projects':
                 const projectsOutput = projectsCommand();
                 setTerminalHistory(terminalHistory => [...terminalHistory, projectsOutput]);
+                break;
+            case 'contact':
+                const contactOutput = contactCommand();
+                setTerminalHistory(terminalHistory => [...terminalHistory, contactOutput]);
                 break;
             default:
                 setTerminalHistory(terminalHistory => [...terminalHistory, 'Command not found']);
