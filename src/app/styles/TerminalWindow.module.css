@@ -14,6 +14,23 @@
   font-size: 1rem;
 }
 
+.maximized {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+  /* Optional: remove border radius when maximized */
+  position: fixed;
+  /* To position it relative to the viewport */
+  top: 0;
+  left: 0;
+  margin: 0;
+  /* Remove any margins */
+  z-index: 9999;
+  /* Ensure it's above other content */
+}
+
 .titleBar {
   display: flex;
   position: fixed;
@@ -26,10 +43,24 @@
   max-width: 60rem;
 }
 
+.maximizedTitleBar {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  padding: 0.6rem;
+  background: #f2f2f2;
+  border-radius: 0;
+  color: rgb(87, 87, 87);
+  width: 100vw;
+  max-width: 100vw;
+}
+
 .buttons {
   display: flex;
   margin-right: 8px;
 }
+
+/* components/TerminalWindow.module.css */
 
 .button {
   height: 12px;
@@ -38,18 +69,54 @@
   margin-right: 8px;
   position: relative;
   top: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.button:hover::before {
+  content: ' ';
+  display: block;
 }
 
 .close {
   background: #ff605c;
 }
 
+.close:hover {
+  background-image: url('../assets/close.svg');
+  background-size: 55%;
+  background-position-x: 49%;
+  background-position-y: 49%;
+  background-repeat: no-repeat;
+}
+
 .minimize {
   background: #ffbd44;
 }
 
+.minimize:hover {
+  background-image: url('../assets/minimize.svg');
+  background-size: 90%;
+  background-position-y: 49%;
+  background-position-x: 46%;
+  background-repeat: no-repeat;
+}
+
 .maximize {
   background: #00ca4e;
+}
+
+.maximize:hover {
+  background-image: url('../assets/expand.svg');
+  background-size: 40%;
+  background-position-x: 49%;
+  background-position-y: 49%;
+  background-repeat: no-repeat;
 }
 
 .title {

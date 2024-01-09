@@ -18,6 +18,7 @@ type TerminalWindowProps = {
 const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
     const [terminalHistory, setTerminalHistory] = useState<string[]>([]);
     const [currentInput, setCurrentInput] = useState('');
+    const [isMaximized, setIsMaximized] = useState(false);
 
     const handleCommand = (command: string) => {
         // Add the command to the terminal history
@@ -69,13 +70,29 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
         }
     };
 
+    const handleMinimizeClick = () => {
+        // Redirect to the main website
+        window.location.href = 'https://jackdavey.org';
+    };
+
+    const handleCloseClick = () => {
+        // Redirect to the main website
+        window.location.href = 'https://jackdavey.org';
+    };
+
+    const handleMaximizeClick = () => {
+        // Adjust the terminal window to be 100vw x 100vh
+        setIsMaximized(!isMaximized);
+    };
+
     return (
-        <div className={styles.terminalWindow}>
-            <div className={styles.titleBar}>
+        <div className={`${styles.terminalWindow} ${isMaximized ? styles.maximized : ''}`}>
+            <div className={`${styles.titleBar} ${isMaximized ? styles.maximizedTitleBar : ''}`}>
                 <div className={styles.buttons}>
-                    <span className={`${styles.button} ${styles.close}`}></span>
-                    <span className={`${styles.button} ${styles.minimize}`}></span>
-                    <span className={`${styles.button} ${styles.maximize}`}></span>
+                    <span className={`${styles.button} ${styles.close}`} onClick={handleCloseClick}></span>
+                    <span className={`${styles.button} ${styles.minimize}`} onClick={handleMinimizeClick}></span>
+                    <span className={`${styles.button} ${styles.maximize}`} onClick={handleMaximizeClick}></span>
+
                 </div>
                 <div className={styles.title}>
                     {/* jack_davey –– -zsh */}
