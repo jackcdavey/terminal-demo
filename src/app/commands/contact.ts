@@ -1,41 +1,44 @@
 // commands/contact.ts
 
-type ContactState = 'NAME' | 'EMAIL' | 'MESSAGE' | 'CONFIRMATION' | 'IDLE';
-let contactState: ContactState = 'IDLE';
+export type ContactCommandState = 'NAME' | 'EMAIL' | 'MESSAGE' | 'CONFIRMATION' | 'IDLE';
 
-export const contactCommand = (input: string): string => {
+export const contactCommand = (
+    input: string,
+    currentState: ContactCommandState,
+    setState: React.Dispatch<React.SetStateAction<ContactCommandState>>
+): string => {
     let output = '';
 
-    switch (contactState) {
+    switch (currentState) {
         case 'IDLE':
-            contactState = 'NAME';
+            setState('NAME');
             output = 'Please enter your name:';
             break;
         case 'NAME':
-            // Save name
-            contactState = 'EMAIL';
+            // Save name logic here
+            setState('EMAIL');
             output = 'Please enter your email:';
             break;
         case 'EMAIL':
-            // Save email
-            contactState = 'MESSAGE';
+            // Save email logic here
+            setState('MESSAGE');
             output = 'Please enter your message:';
             break;
         case 'MESSAGE':
-            // Save message
-            contactState = 'CONFIRMATION';
+            // Save message logic here
+            setState('CONFIRMATION');
             output = 'Press "y" to send your message.';
             break;
         case 'CONFIRMATION':
             if (input.trim().toLowerCase() === 'y') {
-                // Process and send the message
+                // Process and send the message logic here
                 output = 'Message sent! Thank you for reaching out.';
             } else {
                 output = 'Message canceled.';
             }
-            contactState = 'IDLE';
+            setState('IDLE'); // Reset the state to IDLE after completion or cancellation
             break;
-        // ... handle other cases
+        // No default case needed since all possible values of currentState are covered
     }
 
     return output;

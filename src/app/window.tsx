@@ -7,7 +7,7 @@ import styles from './styles/TerminalWindow.module.css';
 import { aboutCommand } from './commands/about';
 import { projectsCommand } from './commands/projects';
 import { helpCommand } from './commands/help';
-import { contactCommand } from './commands/contact';
+import { contactCommand, ContactCommandState } from './commands/contact';
 import { bannerCommand } from './commands/banner';
 import { resumeCommand } from './commands/resume';
 
@@ -19,6 +19,34 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
     const [terminalHistory, setTerminalHistory] = useState<string[]>([]);
     const [currentInput, setCurrentInput] = useState('');
     const [isMaximized, setIsMaximized] = useState(false);
+    const [currentCommand, setCurrentCommand] = useState<null | string>(null);
+    const [contactState, setContactState] = useState<ContactCommandState>('IDLE');
+
+    const handleCommandInput = (input: string) => {
+        if (currentCommand) {
+            const output = handleOngoingCommand(input);
+            setTerminalHistory(terminalHistory => [...terminalHistory, `> ${input}`, output]);
+        } else {
+            handleCommand(input);
+        }
+        setCurrentInput('');
+    };
+
+    const handleOngoingCommand = (input: string): string => {
+        let output = '';
+        switch (currentCommand) {
+            case 'contact':
+                output = contactCommand(input, contactState, setContactState);
+                if (contactState === 'IDLE') {
+                    // Reset the current command once the contact process is completed
+                    setCurrentCommand(null);
+                }
+                break;
+            // ... handle other ongoing commands here
+        }
+        return output;
+    };
+
 
     const handleCommand = (command: string) => {
         // Add the command to the terminal history
@@ -51,10 +79,15 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
                 setTerminalHistory(terminalHistory => [...terminalHistory, projectsOutput]);
                 break;
             case 'contact':
-                const contactOutput = contactCommand();
+                setCurrentCommand('contact');
+                const contactOutput = contactCommand('', contactState, setContactState);
                 setTerminalHistory(terminalHistory => [...terminalHistory, contactOutput]);
                 break;
             default:
+                if (currentCommand) {
+                    // If there's an ongoing command, reset it
+                    setCurrentCommand(null);
+                }
                 setTerminalHistory(terminalHistory => [...terminalHistory, 'Command not found']);
         }
         setCurrentInput('');
@@ -66,7 +99,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
 
     const handleInputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && currentInput) {
-            handleCommand(currentInput);
+            handleCommandInput(currentInput);
         }
     };
 
