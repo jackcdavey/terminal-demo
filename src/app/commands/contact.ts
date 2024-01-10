@@ -37,8 +37,6 @@ export const contactCommand = (
                 output = 'Message canceled.';
             }
             setState('IDLE'); // Reset the state to IDLE after completion or cancellation
-            break;
-        // No default case needed since all possible values of currentState are covered
     }
 
     return output;

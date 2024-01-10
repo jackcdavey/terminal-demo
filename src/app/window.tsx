@@ -1,7 +1,7 @@
 'use client'
 
 import TerminalInput from './input';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles/TerminalWindow.module.css';
 
 import { aboutCommand } from './commands/about';
@@ -22,6 +22,12 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
     const [currentCommand, setCurrentCommand] = useState<null | string>(null);
     const [contactState, setContactState] = useState<ContactCommandState>('IDLE');
 
+    useEffect(() => {
+        if (contactState === 'IDLE') {
+            setCurrentCommand(null);
+        }
+    }, [contactState]);
+
     const handleCommandInput = (input: string) => {
         if (currentCommand) {
             const output = handleOngoingCommand(input);
@@ -38,11 +44,9 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
             case 'contact':
                 output = contactCommand(input, contactState, setContactState);
                 if (contactState === 'IDLE') {
-                    // Reset the current command once the contact process is completed
                     setCurrentCommand(null);
                 }
                 break;
-            // ... handle other ongoing commands here
         }
         return output;
     };
