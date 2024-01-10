@@ -27,6 +27,10 @@ export default function Home() {
         <TaglineTxt />
         <br />
         <br />
+        <span>
+          Welcome to my portfolio, type &apos;help&apos; and press &apos;ENTER&apos; for a list of commands.
+        </span>
+        <br />
         {/* <TerminalText /> */}
       </TerminalWindow>
     </main>

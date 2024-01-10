@@ -15,15 +15,23 @@ const TerminalInput: React.FC<TerminalInputProps> = ({ value, onChange, onKeyPre
     }, []);
 
     return (
-        <input
-            ref={inputRef}
-            className={styles.terminalInput}
-            type="text"
-            value={value}
-            onChange={onChange}
-            onKeyPress={onKeyPress}
-            autoFocus
-        />
+        <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+
+        }}>
+            <span>&gt;</span>
+            <input
+                ref={inputRef}
+                className={styles.terminalInput}
+                type="text"
+                value={value}
+                onChange={onChange}
+                onKeyPress={onKeyPress}
+                autoFocus
+            />
+        </div>
     );
 };
 
