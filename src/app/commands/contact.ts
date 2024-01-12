@@ -32,7 +32,7 @@ export const contactCommand = (
         case 'CONFIRMATION':
             if (input.trim().toLowerCase() === 'y') {
                 // Process and send the message logic here
-                output = 'Message sent! Thank you for reaching out.';
+                output = 'Message (not) sent! Thank you for reaching out.';
             } else {
                 output = 'Message canceled.';
             }
