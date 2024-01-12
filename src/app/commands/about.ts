@@ -1,3 +1,3 @@
 export const aboutCommand = (): string => {
-    return `Jack Davey - UI/UX Developer... (add more about info here)`;
+    return `Led by a lifelong passion for technology and aesthetics, I graduated from Santa Clara University with a B.S. in Web Design and Engineering in 2022, followed by earning my M.S. in Engineering Management and Leadership in 2023. Having spent my entire life in California, I grew up with an immense appreciation for the beauty and simplicity of nature. I've honed my skills through my experience as a UI Developer at Relyion Energy and as a development Research Assistant at SCU, blending technical expertise with creative design. I love to tinker, design, and create, but when I'm not working away at my desk, you'll likely find me hooking the majority of my shots at the driving range, or out exploring the mountains with my hammock and camera.`;
 };
