@@ -1,7 +1,7 @@
 'use client'
 
 import TerminalInput from './input';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './styles/TerminalWindow.module.css';
 
 import { aboutCommand } from './commands/about';
@@ -21,6 +21,19 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
     const [isMaximized, setIsMaximized] = useState(false);
     const [currentCommand, setCurrentCommand] = useState<null | string>(null);
     const [contactState, setContactState] = useState<ContactCommandState>('IDLE');
+
+    // For focusing the input when the user clicks anywhere on the terminal
+    const inputRef = useRef<HTMLInputElement>(null);
+    const focusInput = () => {
+        inputRef.current?.focus();
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', focusInput);
+        return () => {
+            document.removeEventListener('click', focusInput);
+        };
+    }, []);
 
     useEffect(() => {
         if (contactState === 'IDLE') {
@@ -142,6 +155,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
                     <pre key={index} className={styles.preformatted}>{line}</pre>
                 ))}
                 <TerminalInput
+                    ref={inputRef}
                     value={currentInput}
                     onChange={handleInputChange}
                     onKeyPress={handleInputKeyPress}

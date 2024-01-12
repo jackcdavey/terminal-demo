@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import styles from './styles/input.module.css';
 
 type TerminalInputProps = {
@@ -7,32 +7,35 @@ type TerminalInputProps = {
     onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
-const TerminalInput: React.FC<TerminalInputProps> = ({ value, onChange, onKeyPress }) => {
-    const inputRef = useRef<HTMLInputElement>(null);
+const TerminalInput = forwardRef<HTMLInputElement, TerminalInputProps>(
+    ({ value, onChange, onKeyPress }, ref) => {
+        useEffect(() => {
+            if (ref && 'current' in ref) {
+                ref.current?.focus();
+            }
+        }, [ref]);
 
-    useEffect(() => {
-        inputRef.current?.focus();
-    }, []);
+        return (
+            <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+            }}>
+                <span>&gt;</span>
+                <input
+                    ref={ref}
+                    className={styles.terminalInput}
+                    type="text"
+                    value={value}
+                    onChange={onChange}
+                    onKeyPress={onKeyPress}
+                    autoFocus
+                />
+            </div>
+        );
+    }
+);
 
-    return (
-        <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-
-        }}>
-            <span>&gt;</span>
-            <input
-                ref={inputRef}
-                className={styles.terminalInput}
-                type="text"
-                value={value}
-                onChange={onChange}
-                onKeyPress={onKeyPress}
-                autoFocus
-            />
-        </div>
-    );
-};
+TerminalInput.displayName = 'TerminalInput';
 
 export default TerminalInput;
