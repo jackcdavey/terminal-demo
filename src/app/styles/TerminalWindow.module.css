@@ -10,7 +10,7 @@
   height: 90vh;
   max-width: 60rem;
   max-height: 80rem;
-  overflow-x: auto;
+  overflow: auto;
   font-size: 1rem;
 }
 
