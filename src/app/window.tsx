@@ -51,15 +51,17 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
         setCurrentInput('');
     };
 
+    const updateTerminalHistory = (message: string) => {
+        setTerminalHistory(terminalHistory => [...terminalHistory, message]);
+    };
+
     const handleOngoingCommand = (input: string): string => {
         let output = '';
         switch (currentCommand) {
             case 'contact':
-                output = contactCommand(input, contactState, setContactState);
-                if (contactState === 'IDLE') {
-                    setCurrentCommand(null);
-                }
+                output = contactCommand(input, contactState, setContactState, updateTerminalHistory);
                 break;
+            // ... other cases
         }
         return output;
     };
@@ -97,7 +99,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
                 break;
             case 'contact':
                 setCurrentCommand('contact');
-                const contactOutput = contactCommand('', contactState, setContactState);
+                const contactOutput = contactCommand('', contactState, setContactState, updateTerminalHistory);
                 setTerminalHistory(terminalHistory => [...terminalHistory, contactOutput]);
                 break;
             default:
@@ -139,9 +141,9 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
         <div className={`${styles.terminalWindow} ${isMaximized ? styles.maximized : ''}`}>
             <div className={`${styles.titleBar} ${isMaximized ? styles.maximizedTitleBar : ''}`}>
                 <div className={styles.buttons}>
-                    <span className={`${styles.button} ${styles.close}`} onClick={handleCloseClick}></span>
-                    <span className={`${styles.button} ${styles.minimize}`} onClick={handleMinimizeClick}></span>
-                    <span className={`${styles.button} ${styles.maximize}`} onClick={handleMaximizeClick}></span>
+                    <span className={`${styles.button} ${styles.close}`} onClick={handleCloseClick} />
+                    <span className={`${styles.button} ${styles.minimize}`} onClick={handleMinimizeClick} />
+                    <span className={`${styles.button} ${styles.maximize}`} onClick={handleMaximizeClick} />
 
                 </div>
                 <div className={styles.title}>

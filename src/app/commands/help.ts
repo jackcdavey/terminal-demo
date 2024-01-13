@@ -1,5 +1,5 @@
 export const helpCommand = (): string => {
-    return `
+  return `
 Available Commands:
 -------------------
 help        Show a list of commands
