@@ -75,6 +75,20 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
         return output;
     };
 
+    // Render URLs as clickable links
+    const renderWithLinks = (text: string) => {
+        const urlPattern = /\[Link: (https?:\/\/[^\]]+)\]/g;
+        const parts = text.split(urlPattern);
+
+        return parts.map((part, index) => {
+            // Check if 'part' is a URL
+            if (part.match(/^https?:\/\//)) {
+                return <a href={part} target="_blank" rel="noopener noreferrer" key={index}>{part}</a>;
+            }
+            return part;
+        });
+    };
+
 
     const handleCommand = (command: string) => {
         // Add the command to the terminal history
@@ -163,7 +177,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
             <div className={styles.content} ref={contentRef}>
                 {children && <div className={styles.children}>{children}</div>}
                 {terminalHistory.map((line, index) => (
-                    <pre key={index} className={styles.preformatted}>{line}</pre>
+                    <pre key={index} className={styles.preformatted}>{renderWithLinks(line)}</pre>
                 ))}
                 <TerminalInput
                     ref={inputRef}
