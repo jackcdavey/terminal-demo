@@ -22,6 +22,15 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
     const [currentCommand, setCurrentCommand] = useState<null | string>(null);
     const [contactState, setContactState] = useState<ContactCommandState>('IDLE');
 
+    // For scrolling to the bottom of the terminal when new content is added
+    const contentRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (contentRef.current) {
+            contentRef.current.scrollTop = contentRef.current.scrollHeight;
+        }
+    }, [terminalHistory]);
+
+
     // For focusing the input when the user clicks anywhere on the terminal
     const inputRef = useRef<HTMLInputElement>(null);
     const focusInput = () => {
@@ -151,7 +160,7 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
                     jackdavey.org
                 </div>
             </div>
-            <div className={styles.content}>
+            <div className={styles.content} ref={contentRef}>
                 {children && <div className={styles.children}>{children}</div>}
                 {terminalHistory.map((line, index) => (
                     <pre key={index} className={styles.preformatted}>{line}</pre>
