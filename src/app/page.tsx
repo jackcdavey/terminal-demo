@@ -5,7 +5,6 @@ import styles from './styles/page.module.css'
 
 
 import TaglineTxt from './tagline'
-import TerminalText from './terminal'
 import TerminalWindow from './window'
 
 export default function Home() {
@@ -31,7 +30,6 @@ export default function Home() {
           Welcome to my portfolio, type &apos;help&apos; and press &apos;ENTER&apos; for a list of commands.
         </span>
         <br />
-        {/* <TerminalText /> */}
       </TerminalWindow>
     </main>
   )
