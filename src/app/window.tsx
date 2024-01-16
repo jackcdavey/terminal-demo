@@ -10,10 +10,13 @@ import { helpCommand } from './commands/help';
 import { contactCommand, ContactCommandState } from './commands/contact';
 import { bannerCommand } from './commands/banner';
 import { resumeCommand } from './commands/resume';
+import { blackjackCommand, BlackjackGameState } from './commands/blackjack';
 
 type TerminalWindowProps = {
     children: React.ReactNode;
 };
+
+
 
 const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
     const [terminalHistory, setTerminalHistory] = useState<string[]>([]);
@@ -29,6 +32,14 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
             contentRef.current.scrollTop = contentRef.current.scrollHeight;
         }
     }, [terminalHistory]);
+
+
+    const [blackjackState, setBlackjackState] = useState<BlackjackGameState>({
+        deck: [],
+        playerHand: [],
+        dealerHand: [],
+        status: "idle"
+    });
 
 
     // For focusing the input when the user clicks anywhere on the terminal
@@ -120,6 +131,14 @@ const TerminalWindow: React.FC<TerminalWindowProps> = ({ children }) => {
                 const projectsOutput = projectsCommand();
                 setTerminalHistory(terminalHistory => [...terminalHistory, projectsOutput]);
                 break;
+            case 'blackjack start':
+            case 'blackjack hit':
+            case 'blackjack stand':
+                const blackjackCommandInput = command.trim().substring(10).trim();
+                const blackjackOutput = blackjackCommand(blackjackCommandInput, blackjackState, setBlackjackState);
+                setTerminalHistory(terminalHistory => [...terminalHistory, blackjackOutput]);
+                break;
+
             case 'contact':
                 setCurrentCommand('contact');
                 const contactOutput = contactCommand('', contactState, setContactState, updateTerminalHistory);
