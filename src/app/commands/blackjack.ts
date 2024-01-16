@@ -90,7 +90,7 @@ export function blackjackCommand(
             gameState.playerHand = [popCardFromDeck(), popCardFromDeck()];
             gameState.dealerHand = [popCardFromDeck(), popCardFromDeck()];
             gameState.status = "playing";
-            output = `Game started.\nYour hand: ${formatHand(gameState.playerHand)}\nDealer's hand: ${formatHand([gameState.dealerHand[0], { value: '?', suit: '?' }])}`;
+            output = `Game started.\nYour hand: ${formatHand(gameState.playerHand)}\nDealer's hand: ${formatHand([gameState.dealerHand[0], { value: '?', suit: '?' }])}\n\nUse 'blackjack hit' to draw another card, or 'blackjack stand' to hold your hand.`;
             break;
         case 'hit':
             if (gameState.status === "playing") {
